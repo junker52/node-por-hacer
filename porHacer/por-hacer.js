@@ -2,6 +2,14 @@ const fs = require('fs');
 
 let listadoPorHacer = [];
 
+const cargarDB = () => {
+    try {
+        listadoPorHacer = require('../db/data.json');
+    } catch (error) {
+        listadoPorHacer = [];
+    }
+}
+
 const guardarDB = () => {
     let data = JSON.stringify(listadoPorHacer);
 
@@ -13,11 +21,15 @@ const guardarDB = () => {
 
 const crear = (descripcion) => {
 
+    cargarDB();
+
     //Objeto template
     let porHacer = {
         descripcion,
         completado: false
     }
+
+    
 
     listadoPorHacer.push(porHacer);
 
