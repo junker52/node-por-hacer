@@ -15,7 +15,6 @@ const guardarDB = () => {
 
     fs.writeFile('./db/data.json', data, (err) => {
         if (err) throw err;
-        console.log('Data stored OK');
       });
 }
 
@@ -38,6 +37,28 @@ const crear = (descripcion) => {
     return porHacer;
 }
 
+const getListadoTareas = () => {
+    cargarDB();
+    return listadoPorHacer;
+}
+
+const actualizar = (descripcion, completado = true) => {
+    cargarDB();
+    let index = listadoPorHacer.findIndex( tarea => {
+        return tarea.descripcion === descripcion;
+    })
+
+    if (index >= 0) {
+        listadoPorHacer[index].completado = completado;
+        guardarDB();
+        return true;
+    } else {
+        return false;
+    }
+}
+
 module.exports = {
-    crear
+    crear,
+    getListadoTareas,
+    actualizar
 }
