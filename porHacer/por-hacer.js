@@ -57,8 +57,23 @@ const actualizar = (descripcion, completado = true) => {
     }
 }
 
+const borrar = (descripcion) => {
+    cargarDB();
+    let tarea = listadoPorHacer.findIndex((tarea) => {
+        return tarea.descripcion === descripcion;
+    });
+    if (tarea >= 0) {
+        listadoPorHacer.splice(tarea, 1);
+        guardarDB();
+        return true;
+    } else {
+        return false;
+    }
+}
+
 module.exports = {
     crear,
     getListadoTareas,
-    actualizar
+    actualizar,
+    borrar
 }

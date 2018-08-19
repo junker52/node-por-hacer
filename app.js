@@ -27,6 +27,14 @@ switch (comando) {
             console.log('No actualizado');
         }
         break;
+    case 'borrar':
+        let borrado = porHacer.borrar(argv.descripcion)
+        if (borrado) {
+            console.log('Borrado OK');
+        } else {
+            console.log('No borrado');
+        }
+        break;
     default:
         console.log('Comando no reconocido');
         break;
